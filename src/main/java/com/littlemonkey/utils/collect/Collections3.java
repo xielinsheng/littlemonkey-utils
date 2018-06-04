@@ -6,6 +6,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -29,5 +30,9 @@ public class Collections3 extends CollectionUtils {
 
     public static boolean isContainer(Class targetClass) {
         return Collection.class.isAssignableFrom(targetClass) || targetClass.isArray();
+    }
+
+    public static boolean isMap(Class targetClass) {
+        return Map.class.isAssignableFrom(targetClass);
     }
 }

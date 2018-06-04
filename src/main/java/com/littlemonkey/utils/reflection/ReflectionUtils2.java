@@ -9,14 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
-import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
 
 import java.lang.reflect.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 
 public final class ReflectionUtils2 extends org.springframework.util.ReflectionUtils {
@@ -48,45 +49,6 @@ public final class ReflectionUtils2 extends org.springframework.util.ReflectionU
         } catch (Exception e) {
             return tClass.isPrimitive();
         }
-    }
-
-    /**
-     * <p>判断是否是集合或者map</p>
-     *
-     * @param target
-     * @return
-     */
-    public static boolean isContainer(Object target) {
-        if (Objects.isNull(target)) {
-            throw new IllegalArgumentException("target object is null.");
-        }
-        return isCollection(target) || isMap(target);
-    }
-
-    /**
-     * <p>判断对象是否是集合</p>
-     *
-     * @param target
-     * @return
-     */
-    public static boolean isCollection(Object target) {
-        if (Objects.isNull(target)) {
-            throw new IllegalArgumentException("target object is null.");
-        }
-        return Collection.class.isAssignableFrom(target.getClass());
-    }
-
-    /**
-     * <p>判断对象是否是map</p>
-     *
-     * @param target
-     * @return
-     */
-    public static boolean isMap(Object target) {
-        if (Objects.isNull(target)) {
-            throw new IllegalArgumentException("target object is null.");
-        }
-        return Map.class.isAssignableFrom(target.getClass());
     }
 
     /**
@@ -128,7 +90,7 @@ public final class ReflectionUtils2 extends org.springframework.util.ReflectionU
                 getGenericType(genericType, ((ParameterizedTypeImpl) type).getActualTypeArguments());
             } else if (type instanceof Class) {
                 genericType.setOwnerType((Class) type);
-            } else if (type instanceof WildcardTypeImpl){// 通配符类型
+            } else if (type instanceof WildcardTypeImpl) {// 通配符类型
                 genericType.setOwnerType(Object.class);
                 genericType.setWildcard(true);
             }
