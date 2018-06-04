@@ -19,7 +19,7 @@ import java.lang.reflect.*;
 import java.util.*;
 
 
-public final class ReflectionRf extends org.springframework.util.ReflectionUtils {
+public final class ReflectionUtils2 extends org.springframework.util.ReflectionUtils {
 
     private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);
 
